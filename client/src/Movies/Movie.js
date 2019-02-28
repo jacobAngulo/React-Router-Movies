@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React, { Component } from "react";
+import axios from "axios";
 
 export default class Movie extends Component {
   constructor(props) {
@@ -11,14 +11,16 @@ export default class Movie extends Component {
 
   componentDidMount() {
     // change this line to grab the id passed on the URL
-    const id = 1;
-    this.fetchMovie(id);
+    const { banana } = this.props.match.params;
+    this.fetchMovie(banana);
   }
 
   fetchMovie = id => {
     axios
       .get(`http://localhost:5000/api/movies/${id}`)
+      // .get("http://localhost:5000/api/movies/2")
       .then(response => {
+        console.log(response)
         this.setState(() => ({ movie: response.data }));
       })
       .catch(error => {
@@ -26,7 +28,7 @@ export default class Movie extends Component {
       });
   };
   // Uncomment this code when you're ready for the stretch problems
-  // componentWillReceiveProps(newProps){
+  // componentWillReiveProps(newProps){
   //   if(this.props.match.params.id !== newProps.match.params.id){
   //     this.fetchMovie(newProps.match.params.id);
   //   }
